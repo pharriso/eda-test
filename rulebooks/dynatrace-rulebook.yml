@@ -9,15 +9,14 @@
         host: 0.0.0.0
         port: 5000
 
-  ## Define the conditions we are looking for
+  ## Alert if this problem is in OPEN state
 
   rules:
-    - name: Say Hello
-      condition: event
+    - name: test
+      condition: event.payload.State == "OPEN"
 
   ## Define the action we should take should the condition be met
 
       action:
-        run_job_template:
-          name: "Demo Job Template"
-          organization: Default
+        run_playbook:
+          name: dynatrace-debug.yml
